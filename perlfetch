@@ -1,0 +1,88 @@
+#!/usr/bin/env perl
+
+# perlfetch v1.0.0 by danemasen contact@danemasen.com
+# Project is under the MIT license
+
+# subroutine that fetches distribution of Linux
+sub getFlavor {
+ # store shell command in $flavor
+ my $flavor = `lsb_release -sd`;
+ if(index($flavor, "Linux")) {
+  # parse stored command
+  $flavor = substr $flavor, 1, -2;
+  # print flavor of Linux
+  print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+ } else {
+  # print flavor of Linux
+  print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+ }
+}
+
+# subroutine that fetches OS and prints Linux distro if OS is Linux
+sub getOS() {
+ # store os name in $os variable
+ my $os = `uname`;
+ print(" \033[32;1mOS:\033[0m\t\t", $os);
+
+ if(index($os, "Linux") != -1) {
+  # print Linux distro
+  getFlavor();
+ }
+}
+
+# subroutine that fetches up to three batteries
+# and prints their state, i.e. charging, discharging, etc.
+sub getBattery {
+ my $ioreg = system("ioreg --help 2>/dev/null");
+
+ if(-e "/sys/class/power_supply/BAT0/capacity") {
+  my $battery0 = `cat /sys/class/power_supply/BAT0/capacity`;
+  # remove \n character
+  chomp $battery0;
+
+  my $battery0State = `cat /sys/class/power_supply/BAT0/status`;
+  # remove \n character
+  chomp $battery0State;
+  # print the battery if available
+  print(" \033[36;1mBATTERY 0:\033[0m\t", $battery0, "% [", $battery0State, "]\n");
+ } elsif($ioreg == 256) {
+  my $checkOSXBattery = `ioreg -l | grep -o '"CurrentCapacity" = \\d\\+' | grep -o '\\d*'`;
+  chomp $checkOSXBattery;
+  print("\033[36;1m BATTERY:\033[0m\t", $checkOSXBattery, "%\n");
+ }
+
+ if(-e "/sys/class/power_supply/BAT1/capacity") {
+  my $battery1 = `cat /sys/class/power_supply/BAT1/capacity`;
+  # remove \n character
+  chomp $battery1;
+
+  my $battery1State = `cat /sys/class/power_supply/BAT1/status`;
+  # remove \n character
+  chomp $battery1State;
+  # print the second battery if available
+  print(" \033[36;1mBATTERY 1:\033[0m\t", $battery1, "% [", $battery1State, "]\n");
+ }
+
+ if(-e "/sys/class/power_supply/BAT2/capacity") {
+  my $battery2 = `cat /sys/class/power_supply/BAT2/capacity`;
+  # remove \n character
+  chomp $battery2;
+
+  my $battery2State = `cat /sys/class/power_supply/BAT2/status`;
+  # remove \n character
+  chomp $battery2State;
+  # print the third battery if available
+  print(" \033[36;1mBATTERY 2:\033[0m\t", $battery2, "% [", $battery2State, "]\n");
+ }
+}
+
+# print OS and Linux distro if os is Linux
+getOS();
+# print system version
+print(" \033[34;1mVERSION:\033[0m\t", `uname -r`);
+# print terminal used
+print(" \033[32;1mTERMINAL:\033[0m\t", `echo \$TERM`);
+# print shell used
+print(" \033[35;1mSHELL:\033[0m\t\t", `echo \$SHELL`);
+# print battery capacity and status
+getBattery();
