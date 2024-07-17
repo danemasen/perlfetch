@@ -8,7 +8,7 @@ This project is still work in progress! Further testing/development is required 
 Perlfetch has only been tested on \[Void\] Linux and OS X!
 
 ## Dependencies
-- Perl v5.35+
+- Perl
 - lsb-release
 - pciutils
 - GNU Core Utilities
