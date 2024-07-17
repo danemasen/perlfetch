@@ -1,7 +1,7 @@
 # Perlfetch - A Tiny System Information Script
 Perlfetch is my first project, and was made so I could learn Perl.
 
-The script is currently at <50 lines of code, and is <3100 bytes.
+The script is currently at ~50 lines of code, and is <3100 bytes.
 
 This project is still work in progress! Further testing/development is required before it's complete.
 
