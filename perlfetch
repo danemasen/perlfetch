@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# perlfetch v1.0.0 by danemasen contact@danemasen.com
+# perlfetch v1.1.0 by danemasen contact@danemasen.com
 # Project is under the MIT license
 
 # subroutine that fetches distribution of Linux
