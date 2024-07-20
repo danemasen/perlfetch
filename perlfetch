@@ -84,6 +84,8 @@ sub getBattery {
 
 # print OS and Linux distro if os is Linux
 getOS();
+# print architecture
+print(" \033[36;1mARCHITECTURE:\033[0m\t", `uname -m`);
 # print system version
 print(" \033[34;1mVERSION:\033[0m\t", `uname -r`);
 # print terminal used
