@@ -18,6 +18,7 @@ Perlfetch has only been tested on \[Void\] Linux and OS X!
 - Place `perlfetch` in your $PATH (such as `/usr/local/bin`)
 
 ## TODO
+- [x] Add architecture information
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
