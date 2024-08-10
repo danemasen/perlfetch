@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# perlfetch v1.1.0 by danemasen contact@danemasen.com
+# perlfetch v1.2.0 by danemasen contact@danemasen.com
 # Project is under the MIT license
 
 # subroutine that fetches distribution of Linux
@@ -32,53 +32,36 @@ sub getOS() {
  }
 }
 
-# subroutine that fetches up to three batteries
-# and prints their state, i.e. charging, discharging, etc.
+# subroutine that fetches battery capacity
 sub getBattery {
  # store OS X shell command in $ioreg
  my $ioreg = system("ioreg --help 2>/dev/null");
 
- # if battery 0 exits, print it's capacity and status, else print OS X battery level
- if(-e "/sys/class/power_supply/BAT0/capacity") {
-  my $battery0 = `cat /sys/class/power_supply/BAT0/capacity`;
+ # if BAT0 and BAT1 exist, print their combined capacity divided by two
+ if(-e "/sys/class/power_supply/BAT0/capacity" && -e "/sys/class/power_supply/BAT1/capacity") {
+  # store contents of BAT0's capacity in $battery
+  my $battery = `cat /sys/class/power_supply/BAT0/capacity` / 2;
+  # store contents of BAT1's capacity in $battery1
+  my $battery1 = `cat /sys/class/power_supply/BAT1/capacity` / 2;
+  # remove \n character from $battery and $battery1
+  chomp $battery, $battery1;
+  # print current dual battery capacity
+  print(" \033[36;1mBATTERY:\033[0m\t", $battery + $battery1, "%\n");
+  # else if BAT0 exists
+ } elsif(-e "/sys/class/power_supply/BAT0/capacity") {
+  my $battery = `cat /sys/class/power_supply/BAT0/capacity`;
   # remove \n character
-  chomp $battery0;
-
-  my $battery0State = `cat /sys/class/power_supply/BAT0/status`;
-  # remove \n character
-  chomp $battery0State;
-  # print the battery if available
-  print(" \033[36;1mBATTERY 0:\033[0m\t", $battery0, "% [", $battery0State, "]\n");
+  chomp $battery;
+  # print current single battery capacity
+  print(" \033[36;1mBATTERY:\033[0m\t", $battery, "%\n");
+  # else if ioreg command exists
  } elsif($ioreg == 256) {
+  # store
   my $checkOSXBattery = `ioreg -l | grep -o '"CurrentCapacity" = \\d\\+' | grep -o '\\d*'`;
+  # remove \n character
   chomp $checkOSXBattery;
+  # print current OS X battery capacity
   print("\033[36;1m BATTERY:\033[0m\t", $checkOSXBattery, "%\n");
- }
-
- # if battery 1 exits, print it's capacity and status
- if(-e "/sys/class/power_supply/BAT1/capacity") {
-  my $battery1 = `cat /sys/class/power_supply/BAT1/capacity`;
-  # remove \n character
-  chomp $battery1;
-
-  my $battery1State = `cat /sys/class/power_supply/BAT1/status`;
-  # remove \n character
-  chomp $battery1State;
-  # print the second battery if available
-  print(" \033[36;1mBATTERY 1:\033[0m\t", $battery1, "% [", $battery1State, "]\n");
- }
-
- # if battery 2 exits, print it's capacity and status
- if(-e "/sys/class/power_supply/BAT2/capacity") {
-  my $battery2 = `cat /sys/class/power_supply/BAT2/capacity`;
-  # remove \n character
-  chomp $battery2;
-
-  my $battery2State = `cat /sys/class/power_supply/BAT2/status`;
-  # remove \n character
-  chomp $battery2State;
-  # print the third battery if available
-  print(" \033[36;1mBATTERY 2:\033[0m\t", $battery2, "% [", $battery2State, "]\n");
  }
 }
 
