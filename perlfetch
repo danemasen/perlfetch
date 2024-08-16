@@ -44,7 +44,7 @@ sub getBattery {
   # store contents of BAT1's capacity in $battery1
   my $battery1 = `cat /sys/class/power_supply/BAT1/capacity` / 2;
   # remove \n character from $battery and $battery1
-  chomp $battery, $battery1;
+  chomp ($battery, $battery1);
   # print current dual battery capacity
   print(" \033[36;1mBATTERY:\033[0m\t", $battery + $battery1, "%\n");
   # else if BAT0 exists
