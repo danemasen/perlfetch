@@ -19,6 +19,7 @@ Perlfetch has only been tested on \[Void\] Linux and OS X!
 
 ## TODO
 - [x] Add architecture information
+- [ ] Add user configuration through environment variables
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
