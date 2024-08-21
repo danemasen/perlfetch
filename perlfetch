@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
-# perlfetch v1.2.0 by danemasen contact@danemasen.com
-# Project is under the MIT license
+# perlfetch v1.2.1 by danemasen contact@danemasen.com
+# Project is under the ISC license
 
 # subroutine that fetches distribution of Linux
 sub getFlavor {
