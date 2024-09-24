@@ -90,6 +90,9 @@ sub getBattery {
 
 }
 
+# print host name
+print(" \033[37;1mHOST:\033[0m\t\t", `uname -n`);
+
 # print OS and Linux distro if os is Linux
 getOS();
 
