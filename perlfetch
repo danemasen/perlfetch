@@ -1,79 +1,109 @@
 #!/usr/bin/env perl
 
-# perlfetch v1.2.1 by danemasen contact@danemasen.com
+# perlfetch v1.2.2 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 # subroutine that fetches distribution of Linux
 sub getFlavor {
+
  # store shell command in $flavor
  my $flavor = `lsb_release -sd`;
+
  # if $flavor contains "Linux" then remove quotes, otherwise ignore quotes
- if(index($flavor, "Linux")) {
+ if (index($flavor, "Linux")) {
+
   # parse stored command
   $flavor = substr $flavor, 1, -2;
+
   # print flavor of Linux
   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+
  } else {
+
   # print flavor of Linux
   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
  }
+
 }
 
 # subroutine that fetches OS and prints Linux distro if OS is Linux
 sub getOS() {
+
  # store os name in $os variable
  my $os = `uname`;
  print(" \033[32;1mOS:\033[0m\t\t", $os);
 
  # if $os contains "Linux" then print $flavor otherwise ignore $flavor
- if(index($os, "Linux") != -1) {
+ if (index($os, "Linux") != -1) {
+
   # print Linux distro
   getFlavor();
  }
+
 }
 
 # subroutine that fetches battery capacity
 sub getBattery {
+
  # store OS X shell command in $ioreg
  my $ioreg = system("ioreg --help 2>/dev/null");
 
  # if BAT0 and BAT1 exist, print their combined capacity divided by two
- if(-e "/sys/class/power_supply/BAT0/capacity" && -e "/sys/class/power_supply/BAT1/capacity") {
+ if (-e "/sys/class/power_supply/BAT0/capacity" && -e "/sys/class/power_supply/BAT1/capacity") {
+
   # store contents of BAT0's capacity in $battery
   my $battery = `cat /sys/class/power_supply/BAT0/capacity` / 2;
+
   # store contents of BAT1's capacity in $battery1
   my $battery1 = `cat /sys/class/power_supply/BAT1/capacity` / 2;
+
   # remove \n character from $battery and $battery1
   chomp ($battery, $battery1);
+
   # print current dual battery capacity
   print(" \033[36;1mBATTERY:\033[0m\t", $battery + $battery1, "%\n");
+
   # else if BAT0 exists
- } elsif(-e "/sys/class/power_supply/BAT0/capacity") {
+ } elsif (-e "/sys/class/power_supply/BAT0/capacity") {
+
+  # store contents of BAT0 in $battery
   my $battery = `cat /sys/class/power_supply/BAT0/capacity`;
+
   # remove \n character
   chomp $battery;
+
   # print current single battery capacity
   print(" \033[36;1mBATTERY:\033[0m\t", $battery, "%\n");
+
   # else if ioreg command exists
- } elsif($ioreg == 256) {
-  # store
+ } elsif ($ioreg == 256) {
+
+  # store OS X battery
   my $checkOSXBattery = `ioreg -l | grep -o '"CurrentCapacity" = \\d\\+' | grep -o '\\d*'`;
+
   # remove \n character
   chomp $checkOSXBattery;
+
   # print current OS X battery capacity
   print("\033[36;1m BATTERY:\033[0m\t", $checkOSXBattery, "%\n");
  }
+
 }
 
 # print OS and Linux distro if os is Linux
 getOS();
+
 # print architecture
 print(" \033[36;1mARCHITECTURE:\033[0m\t", `uname -m`);
+
 # print system version
 print(" \033[34;1mVERSION:\033[0m\t", `uname -r`);
+
 # print terminal used
 print(" \033[32;1mTERMINAL:\033[0m\t", `echo \$TERM`);
+
 # print shell used
 print(" \033[35;1mSHELL:\033[0m\t\t", `echo \$SHELL`);
+
 # print battery capacity and status
 getBattery();
