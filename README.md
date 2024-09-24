@@ -5,7 +5,7 @@ The script is currently at ~50 lines of code.
 
 This project is still work in progress! Further testing/development is required before it's complete.
 
-Perlfetch has only been tested on \[Void\] Linux and OS X!
+Perlfetch has been tested on \[Void\] Linux, OpenBSD and OS X!
 
 ## Dependencies
 - Perl
