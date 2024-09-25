@@ -1,7 +1,8 @@
 #!/usr/bin/env perl
 
-# perlfetch v1.2.2 by danemasen contact@danemasen.com
+# perlfetch v1.2.3 by danemasen contact@danemasen.com
 # Project is under the ISC license
+
 
 # subroutine that fetches distribution of Linux
 sub getFlavor {
@@ -22,15 +23,18 @@ sub getFlavor {
 
   # print flavor of Linux
   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+
  }
 
 }
+
 
 # subroutine that fetches OS and prints Linux distro if OS is Linux
 sub getOS() {
 
  # store os name in $os variable
  my $os = `uname`;
+
  print(" \033[32;1mOS:\033[0m\t\t", $os);
 
  # if $os contains "Linux" then print $flavor otherwise ignore $flavor
@@ -38,9 +42,11 @@ sub getOS() {
 
   # print Linux distro
   getFlavor();
+
  }
 
 }
+
 
 # subroutine that fetches battery capacity
 sub getBattery {
@@ -86,9 +92,11 @@ sub getBattery {
 
   # print current OS X battery capacity
   print("\033[36;1m BATTERY:\033[0m\t", $checkOSXBattery, "%\n");
+
  }
 
 }
+
 
 # print host name
 print(" \033[37;1mHOST:\033[0m\t\t", `uname -n`);
