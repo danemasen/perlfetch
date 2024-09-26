@@ -1,7 +1,29 @@
 #!/usr/bin/env perl
 
-# perlfetch v1.2.3 by danemasen contact@danemasen.com
+
+# perlfetch v1.3.0 by danemasen contact@danemasen.com
 # Project is under the ISC license
+
+
+my $no_color = $ENV{NO_COLOR};
+
+# subroutine that fetches the host name of the current machine
+sub getHostName {
+
+ # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ if ($no_color == 1) {
+
+  # print host name
+  print(" HOST:\t\t", `uname -n`);
+
+ } else {
+
+  # print host name
+  print(" \033[37;1mHOST:\033[0m\t\t", `uname -n`);
+
+ }
+
+}
 
 
 # subroutine that fetches distribution of Linux
@@ -16,13 +38,33 @@ sub getFlavor {
   # parse stored command
   $flavor = substr $flavor, 1, -2;
 
-  # print flavor of Linux
-  print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  if ($no_color == 1) {
+
+   # print flavor of Linux
+   print(" FLAVOR:\t", $flavor, "\n");
+
+  } else {
+
+   # print flavor of Linux
+   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+
+  }
 
  } else {
 
-  # print flavor of Linux
-  print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  if ($no_color == 1) {
+
+   # print flavor of Linux without color
+   print(" FLAVOR:\t", $flavor, "\n");
+
+  } else {
+
+   # print flavor of Linux with color
+   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+
+  }
 
  }
 
@@ -35,13 +77,99 @@ sub getOS() {
  # store os name in $os variable
  my $os = `uname`;
 
- print(" \033[32;1mOS:\033[0m\t\t", $os);
+ # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ if ($no_color == 1) {
+
+  # print operating system without color
+  print(" OS:\t\t", $os);
+
+ } else {
+  
+  # print operating system with color
+  print(" \033[32;1mOS:\033[0m\t\t", $os);
+
+ }
 
  # if $os contains "Linux" then print $flavor otherwise ignore $flavor
  if (index($os, "Linux") != -1) {
 
   # print Linux distro
   getFlavor();
+
+ }
+
+}
+
+
+# subroutine that fetches the current architecture
+sub getArch {
+
+ # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ if ($no_color == 1) {
+
+  # print machine's architecture without color
+  print(" ARCHITECTURE:\t", `uname -m`);
+
+ } else {
+
+  # print machine's architecture with color
+  print(" \033[36;1mARCHITECTURE:\033[0m\t", `uname -m`);
+
+ }
+
+}
+
+
+# subroutine that fetches current OS or kernel version
+sub getVersion {
+
+ # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ if ($no_color == 1) {
+
+  # print system version without color
+  print(" VERSION:\t", `uname -r`);
+
+ } else {
+
+  # print system version with color
+  print(" \033[34;1mVERSION:\033[0m\t", `uname -r`);
+
+ }
+
+}
+
+
+# subroutine that fetches the current terminal being used
+sub getTerminal {
+
+ # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ if ($no_color == 1) {
+
+  # print terminal used without color
+  print(" TERMINAL:\t", `echo \$TERM`);
+
+ } else {
+
+  # print terminal used with color
+  print(" \033[32;1mTERMINAL:\033[0m\t", `echo \$TERM`);
+
+ }
+
+}
+
+
+sub getShell {
+
+ # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ if ($no_color == 1) {
+
+ # print shell used without color
+ print(" SHELL:\t\t", `echo \$SHELL`);
+
+ } else {
+
+ # print shell used with color
+ print(" \033[35;1mSHELL:\033[0m\t\t", `echo \$SHELL`);
 
  }
 
@@ -66,8 +194,18 @@ sub getBattery {
   # remove \n character from $battery and $battery1
   chomp ($battery, $battery1);
 
-  # print current dual battery capacity
-  print(" \033[36;1mBATTERY:\033[0m\t", $battery + $battery1, "%\n");
+  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  if ($no_color == 1) {
+
+   # print current dual battery capacity without color
+   print(" BATTERY:\t", $battery + $battery1, "%\n");
+
+  } else {
+
+   # print current dual battery capacity with color
+   print(" \033[36;1mBATTERY:\033[0m\t", $battery + $battery1, "%\n");
+
+  }
 
   # else if BAT0 exists
  } elsif (-e "/sys/class/power_supply/BAT0/capacity") {
@@ -78,8 +216,18 @@ sub getBattery {
   # remove \n character
   chomp $battery;
 
-  # print current single battery capacity
-  print(" \033[36;1mBATTERY:\033[0m\t", $battery, "%\n");
+  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  if ($no_color == 1) {
+
+   # print current single battery capacity without color
+   print(" BATTERY:\t", $battery, "%\n");
+
+  } else {
+
+   # print current single battery capacity with color
+   print(" \033[36;1mBATTERY:\033[0m\t", $battery, "%\n");
+
+  }
 
   # else if ioreg command exists
  } elsif ($ioreg == 256) {
@@ -90,8 +238,18 @@ sub getBattery {
   # remove \n character
   chomp $checkOSXBattery;
 
-  # print current OS X battery capacity
-  print("\033[36;1m BATTERY:\033[0m\t", $checkOSXBattery, "%\n");
+  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  if ($no_color == 1) {
+
+   # print current OS X battery capacity without color
+   print(" BATTERY:\t", $checkOSXBattery, "%\n");
+
+  } else {
+
+   # print current OS X battery capacity
+   print(" \033[36;1mBATTERY:\033[0m\t", $checkOSXBattery, "%\n");
+
+  }
 
  }
 
@@ -99,22 +257,22 @@ sub getBattery {
 
 
 # print host name
-print(" \033[37;1mHOST:\033[0m\t\t", `uname -n`);
+getHostName();
 
 # print OS and Linux distro if os is Linux
 getOS();
 
 # print architecture
-print(" \033[36;1mARCHITECTURE:\033[0m\t", `uname -m`);
+getArch();
 
 # print system version
-print(" \033[34;1mVERSION:\033[0m\t", `uname -r`);
+getVersion();
 
 # print terminal used
-print(" \033[32;1mTERMINAL:\033[0m\t", `echo \$TERM`);
+getTerminal();
 
 # print shell used
-print(" \033[35;1mSHELL:\033[0m\t\t", `echo \$SHELL`);
+getShell();
 
 # print battery capacity and status
 getBattery();
