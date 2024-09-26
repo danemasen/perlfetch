@@ -16,7 +16,7 @@ Perlfetch has been tested on \[Void\] Linux, OpenBSD and OS X!
 - Place `perlfetch` in your $PATH (such as `/usr/local/bin`)
 
 ## Customization
-Currently Perlfetch only supports one environment variable (PERLFETCH_NO_COLOR) that can be used to customize it a bit.
+Currently Perlfetch only supports one environment variable (NO_COLOR) that can be used to customize it a bit.
 To make Perlfetch print without colors:
 
 - Add `export NO_COLOR=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
