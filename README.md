@@ -31,3 +31,6 @@ To make Perlfetch print without colors:
 - [ ] Add GPU information
 - [ ] Add RAM usage
 - [ ] Add swap usage
+
+## Known Issues
+- Battery doesn't show on OpenBSD (and possibly other BSDs.)
