@@ -28,7 +28,7 @@ To make Perlfetch print without colors:
 ## TODO
 - [x] Add architecture information
 - [x] Add host name
-- [ ] **IN PROGRESS** Add user configuration through environment variables
+- [ ] \***IN PROGRESS**\* Add user configuration through environment variables
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
