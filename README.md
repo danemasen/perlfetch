@@ -3,7 +3,9 @@ Perlfetch is my first project, and was made so I could learn Perl.
 
 This project is still work in progress! Further testing/development is required before it's complete.
 
-Perlfetch has been tested on \[Void\] Linux, OpenBSD and OS X!
+Perlfetch has been tested on \[Void\] Linux, \[Open\]BSD and OS X!
+
+Currently shows host name, operating system, architecture, system/kernel version, terminal and shell in use. Battery is shown on Linux and Mac if applicable.
 
 ## Dependencies
 - Perl
