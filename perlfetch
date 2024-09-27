@@ -5,7 +5,9 @@
 # Project is under the ISC license
 
 
+# read and store environment variables
 my $no_color = $ENV{NO_COLOR};
+my $no_battery = $ENV{PERLFETCH_NO_BATTERY};
 
 # subroutine that fetches the host name of the current machine
 sub getHostName {
@@ -274,5 +276,13 @@ getTerminal();
 # print shell used
 getShell();
 
-# print battery capacity and status
-getBattery();
+if ($no_battery == 1) {
+
+ # do nothing
+
+} else {
+
+ # print battery capacity and status
+ getBattery();
+
+}

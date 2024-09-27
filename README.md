@@ -18,10 +18,18 @@ Currently shows host name, operating system, architecture, system/kernel version
 - Place `perlfetch` in your $PATH (such as `/usr/local/bin`)
 
 ## Customization
-Currently Perlfetch only supports one environment variable (NO_COLOR) that can be used to customize it a bit.
+Currently Perlfetch only supports two environment variables (NO_COLOR and PERLFETCH_NO_BATTERY) that can be used to customize it a bit.
+
 To make Perlfetch print without colors:
 
 - Add `export NO_COLOR=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
+- `source` said config/rc file or launch a new terminal
+- Test the change by running `perlfetch`
+
+
+To make Perlfetch not print battery info on systems with a battery:
+
+- Add `export PERLFETCH_NO_BATTERY=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
 - `source` said config/rc file or launch a new terminal
 - Test the change by running `perlfetch`
 
