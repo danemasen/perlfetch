@@ -276,13 +276,13 @@ getTerminal();
 # print shell used
 getShell();
 
-if ($no_battery == 1) {
-
- # do nothing
-
-} else {
+if ($no_battery != 1) {
 
  # print battery capacity and status
  getBattery();
+
+} else {
+
+ # do nothing
 
 }
