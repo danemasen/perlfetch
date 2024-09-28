@@ -18,25 +18,34 @@ Currently shows host name, operating system, architecture, system/kernel version
 - Place `perlfetch` in your $PATH (such as `/usr/local/bin`)
 
 ## Customization
-Currently Perlfetch only supports two environment variables (NO_COLOR and PERLFETCH_NO_BATTERY) that can be used to customize it a bit.
+Perlfetch supports customization through environment variables.
 
-To make Perlfetch print without colors:
+To customize Perlfetch:
 
-- Add `export NO_COLOR=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
+- Add `export ENVIRONMENT_VARIABLE=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
 - `source` said config/rc file or launch a new terminal
 - Test the change by running `perlfetch`
 
+Replace `ENVIRONMENT_VARIABLE` with any of the following:
 
-To make Perlfetch not print battery info on systems with a battery:
+```
+NO_COLOR
+PERLFETCH_NO_HOST
+PERLFETCH_NO_OS
+PERLFETCH_NO_FLAVOR
+PERLFETCH_NO_ARCH
+PERLFETCH_NO_TERMINAL
+PERLFETCH_NO_VERSION
+PERLFETCH_NO_SHELL
+PERLFETCH_NO_BATTERY
+```
 
-- Add `export PERLFETCH_NO_BATTERY=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
-- `source` said config/rc file or launch a new terminal
-- Test the change by running `perlfetch`
+And of course, multiple can be applied at the same time.
 
 ## TODO
 - [x] Add architecture information
 - [x] Add host name
-- [ ] \***IN PROGRESS**\* Add user configuration through environment variables
+- [x] Add user configuration through environment variables
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage

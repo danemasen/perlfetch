@@ -7,7 +7,15 @@
 
 # read and store environment variables
 my $no_color = $ENV{NO_COLOR};
+my $no_host = $ENV{PERLFETCH_NO_HOST};
+my $no_os = $ENV{PERLFETCH_NO_OS};
+my $no_flavor = $ENV{PERLFETCH_NO_FLAVOR};
+my $no_arch = $ENV{PERLFETCH_NO_ARCH};
+my $no_version = $ENV{PERLFETCH_NO_VERSION};
+my $no_terminal = $ENV{PERLFETCH_NO_TERMINAL};
+my $no_shell = $ENV{PERLFETCH_NO_SHELL};
 my $no_battery = $ENV{PERLFETCH_NO_BATTERY};
+
 
 # subroutine that fetches the host name of the current machine
 sub getHostName {
@@ -43,12 +51,12 @@ sub getFlavor {
   # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
   if ($no_color == 1) {
 
-   # print flavor of Linux
+   # print flavor of Linux without color
    print(" FLAVOR:\t", $flavor, "\n");
 
   } else {
 
-   # print flavor of Linux
+   # print flavor of Linux with color
    print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
 
   }
@@ -93,7 +101,7 @@ sub getOS() {
  }
 
  # if $os contains "Linux" then print $flavor otherwise ignore $flavor
- if (index($os, "Linux") != -1) {
+ if (index($os, "Linux") != -1 && $no_flavor != 1) {
 
   # print Linux distro
   getFlavor();
@@ -258,31 +266,63 @@ sub getBattery {
 }
 
 
-# print host name
-getHostName();
+if ($no_host != 1) {
 
-# print OS and Linux distro if os is Linux
-getOS();
+ # print host name
+ getHostName();
 
-# print architecture
-getArch();
+}
 
-# print system version
-getVersion();
+if ($no_os != 1) {
 
-# print terminal used
-getTerminal();
+ # print OS and Linux distro if os is Linux
+ getOS();
 
-# print shell used
-getShell();
+}
+
+if ($no_flavor != 1 && $no_os == 1) {
+
+ getFlavor();
+
+}
+
+if ($no_arch != 1) {
+
+ # print architecture
+ getArch();
+
+}
+
+if ($no_version != 1) {
+
+ # print system version
+ getVersion();
+
+}
+
+if ($no_terminal != 1) {
+
+ # print terminal used
+ getTerminal();
+
+}
+
+if ($no_shell != 1) {
+
+ # print shell used
+ getShell();
+
+}
 
 if ($no_battery != 1) {
 
  # print battery capacity and status
  getBattery();
 
-} else {
+}
 
- # do nothing
+if ($no_host == 1 && $no_os == 1 && $no_flavor == 1 && $no_arch == 1 && $no_version == 1 && $no_terminal == 1 && $no_shell == 1 && $no_battery == 1) {
+
+ print " \033[31;1mAll modules are disabled!\033[0m\n";
 
 }
