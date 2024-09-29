@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.3.0 by danemasen contact@danemasen.com
+# perlfetch v1.4.0 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -24,12 +24,12 @@ sub getHostName {
  if ($no_color == 1) {
 
   # print host name
-  print(" HOST:\t\t", `uname -n`);
+  print(" HOST\t\t| ", `uname -n`);
 
  } else {
 
   # print host name
-  print(" \033[37;1mHOST:\033[0m\t\t", `uname -n`);
+  print(" \033[37;1mHOST\t\t|\033[0m ", `uname -n`);
 
  }
 
@@ -52,12 +52,12 @@ sub getFlavor {
   if ($no_color == 1) {
 
    # print flavor of Linux without color
-   print(" FLAVOR:\t", $flavor, "\n");
+   print(" FLAVOR\t| ", $flavor, "\n");
 
   } else {
 
    # print flavor of Linux with color
-   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+   print(" \033[33;1mFLAVOR\t\t|\033[0m ", $flavor, "\n");
 
   }
 
@@ -67,12 +67,12 @@ sub getFlavor {
   if ($no_color == 1) {
 
    # print flavor of Linux without color
-   print(" FLAVOR:\t", $flavor, "\n");
+   print(" FLAVOR\t| ", $flavor, "\n");
 
   } else {
 
    # print flavor of Linux with color
-   print(" \033[33;1mFLAVOR:\033[0m\t", $flavor, "\n");
+   print(" \033[33;1mFLAVOR\033[0m\t| ", $flavor, "\n");
 
   }
 
@@ -91,12 +91,12 @@ sub getOS() {
  if ($no_color == 1) {
 
   # print operating system without color
-  print(" OS:\t\t", $os);
+  print(" OS\t\t| ", $os);
 
  } else {
   
   # print operating system with color
-  print(" \033[32;1mOS:\033[0m\t\t", $os);
+  print(" \033[32;1mOS\t\t|\033[0m ", $os);
 
  }
 
@@ -118,12 +118,12 @@ sub getArch {
  if ($no_color == 1) {
 
   # print machine's architecture without color
-  print(" ARCHITECTURE:\t", `uname -m`);
+  print(" ARCHITECTURE\t| ", `uname -m`);
 
  } else {
 
   # print machine's architecture with color
-  print(" \033[36;1mARCHITECTURE:\033[0m\t", `uname -m`);
+  print(" \033[36;1mARCHITECTURE\t|\033[0m ", `uname -m`);
 
  }
 
@@ -137,12 +137,12 @@ sub getVersion {
  if ($no_color == 1) {
 
   # print system version without color
-  print(" VERSION:\t", `uname -r`);
+  print(" VERSION\t| ", `uname -r`);
 
  } else {
 
   # print system version with color
-  print(" \033[34;1mVERSION:\033[0m\t", `uname -r`);
+  print(" \033[34;1mVERSION\t|\033[0m ", `uname -r`);
 
  }
 
@@ -156,12 +156,12 @@ sub getTerminal {
  if ($no_color == 1) {
 
   # print terminal used without color
-  print(" TERMINAL:\t", `echo \$TERM`);
+  print(" TERMINAL\t| ", `echo \$TERM`);
 
  } else {
 
   # print terminal used with color
-  print(" \033[32;1mTERMINAL:\033[0m\t", `echo \$TERM`);
+  print(" \033[32;1mTERMINAL\t|\033[0m ", `echo \$TERM`);
 
  }
 
@@ -174,12 +174,12 @@ sub getShell {
  if ($no_color == 1) {
 
  # print shell used without color
- print(" SHELL:\t\t", `echo \$SHELL`);
+ print(" SHELL\t\t| ", `echo \$SHELL`);
 
  } else {
 
  # print shell used with color
- print(" \033[35;1mSHELL:\033[0m\t\t", `echo \$SHELL`);
+ print(" \033[35;1mSHELL\t\t|\033[0m ", `echo \$SHELL`);
 
  }
 
@@ -208,12 +208,12 @@ sub getBattery {
   if ($no_color == 1) {
 
    # print current dual battery capacity without color
-   print(" BATTERY:\t", $battery + $battery1, "%\n");
+   print(" BATTERY\t| ", $battery + $battery1, "%\n");
 
   } else {
 
    # print current dual battery capacity with color
-   print(" \033[36;1mBATTERY:\033[0m\t", $battery + $battery1, "%\n");
+   print(" \033[36;1mBATTERY\t|\033[0m ", $battery + $battery1, "%\n");
 
   }
 
@@ -230,12 +230,12 @@ sub getBattery {
   if ($no_color == 1) {
 
    # print current single battery capacity without color
-   print(" BATTERY:\t", $battery, "%\n");
+   print(" BATTERY\t| ", $battery, "%\n");
 
   } else {
 
    # print current single battery capacity with color
-   print(" \033[36;1mBATTERY:\033[0m\t", $battery, "%\n");
+   print(" \033[36;1mBATTERY\t|\033[0m ", $battery, "%\n");
 
   }
 
@@ -252,12 +252,12 @@ sub getBattery {
   if ($no_color == 1) {
 
    # print current OS X battery capacity without color
-   print(" BATTERY:\t", $checkOSXBattery, "%\n");
+   print(" BATTERY\t| ", $checkOSXBattery, "%\n");
 
   } else {
 
    # print current OS X battery capacity
-   print(" \033[36;1mBATTERY:\033[0m\t", $checkOSXBattery, "%\n");
+   print(" \033[36;1mBATTERY\t|\033[0m ", $checkOSXBattery, "%\n");
 
   }
 
