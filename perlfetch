@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.6.1 by danemasen contact@danemasen.com
+# perlfetch v1.6.2 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -9,6 +9,7 @@
 my $no_color = $ENV{NO_COLOR};
 my $no_date = $ENV{PERLFETCH_NO_DATE};
 my $no_time = $ENV{PERLFETCH_NO_TIME};
+my $imperial = $ENV{PERLFETCH_USE_IMPERIAL};
 my $no_host = $ENV{PERLFETCH_NO_HOST};
 my $no_os = $ENV{PERLFETCH_NO_OS};
 my $no_flavor = $ENV{PERLFETCH_NO_FLAVOR};
@@ -38,13 +39,52 @@ sub getDate {
 # subroutine that fetches time
 sub getTime {
 
+ my $imperial_time = `date +"%I:%M "`;
+ chomp $imperial_time;
+
  if ($no_color == 1) {
 
-  print(" TIME\t\t| ", `date +"%H:%M"`);
+  if ($imperial == 1) {
+
+   print(" TIME\t\t| ", $imperial_time);
+
+   if (`date +"%H"` < 12) {
+
+    print("am\n");
+
+   } else {
+
+    print("pm\n");
+
+   }
+
+  } else {
+
+   print(" TIME\t\t| ", `date +"%H:%M"`);
+
+  }
 
  } else {
 
-  print(" \033[35;1mTIME\t\t|\033[0m ", `date +"%H:%M"`);
+  if ($imperial == 1) {
+
+   print(" \033[35;1mTIME\t\t|\033[0m ", $imperial_time);
+
+   if (`date +"%H"` < 12) {
+
+    print("am\n");
+
+   } else {
+
+    print("pm\n");
+
+   }
+
+  } else {
+
+   print(" \033[35;1mTIME\t\t|\033[0m ", `date +"%H:%M"`);
+
+  }
 
  }
 
