@@ -126,7 +126,7 @@ sub getFlavor {
   if ($no_color == 1) {
 
    # print flavor of Linux without color
-   print(" FLAVOR\t| ", $flavor, "\n");
+   print(" FLAVOR\t\t| ", $flavor, "\n");
 
   } else {
 
