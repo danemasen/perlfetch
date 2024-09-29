@@ -364,7 +364,7 @@ if ($no_battery != 1) {
 
 }
 
-if ($no_host == 1 && $no_os == 1 && $no_flavor == 1 && $no_arch == 1 && $no_version == 1 && $no_terminal == 1 && $no_shell == 1 && $no_battery == 1) {
+if ($no_date == 1 && $no_time == 1 && $no_host == 1 && $no_os == 1 && $no_flavor == 1 && $no_arch == 1 && $no_version == 1 && $no_terminal == 1 && $no_shell == 1 && $no_battery == 1) {
 
  if ($no_color == 1) {
 
