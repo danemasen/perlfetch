@@ -106,7 +106,7 @@ sub getOS() {
   # print Linux distro
   getFlavor();
 
- }
+ } elsif (index($os, "Linux") != -1 && $no_flavor != 1) {}
 
 }
 
@@ -277,12 +277,6 @@ if ($no_os != 1) {
 
  # print OS and Linux distro if os is Linux
  getOS();
-
-}
-
-if ($no_flavor != 1 && $no_os == 1) {
-
- getFlavor();
 
 }
 
