@@ -5,8 +5,6 @@ This project is still work in progress! Further testing/development is required 
 
 Perlfetch has been tested on \[Void\] Linux, \[Open\]BSD and OS X!
 
-Currently shows host name, operating system, architecture, system/kernel version, terminal and shell in use. Battery is shown on Linux and Mac if applicable.
-
 ![demo](perlfetch_demo.gif)
 
 ## Dependencies
@@ -32,6 +30,8 @@ Replace `ENVIRONMENT_VARIABLE` with any of the following:
 
 ```
 NO_COLOR
+PERLFETCH_NO_DATE
+PERLFETCH_NO_TIME
 PERLFETCH_NO_HOST
 PERLFETCH_NO_OS
 PERLFETCH_NO_FLAVOR
