@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.6.0 by danemasen contact@danemasen.com
+# perlfetch v1.6.1 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -24,11 +24,11 @@ sub getDate {
 
  if ($no_color == 1) {
 
-  print(" DATE\t\t| ", `date +"%Y/%m/%d"`);
+  print(" DATE\t\t| ", `date +"%Y-%m-%d"`);
 
  } else {
 
-  print(" \033[34;1mDATE\t\t|\033[0m ", `date +"%Y/%m/%d"`);
+  print(" \033[34;1mDATE\t\t|\033[0m ", `date +"%Y-%m-%d"`);
 
  }
 
