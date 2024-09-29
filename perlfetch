@@ -116,7 +116,7 @@ sub getFlavor {
 
 
 # subroutine that fetches OS and prints Linux distro if OS is Linux
-sub getOS() {
+sub getOS {
 
  # store os name in $os variable
  my $os = `uname`;
