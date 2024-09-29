@@ -48,6 +48,7 @@ And of course, multiple can be applied at the same time.
 - [x] Add architecture information
 - [x] Add host name
 - [x] Add user configuration through environment variables
+- [x] Add date
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
