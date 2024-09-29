@@ -7,6 +7,8 @@ Perlfetch has been tested on \[Void\] Linux, \[Open\]BSD and OS X!
 
 Currently shows host name, operating system, architecture, system/kernel version, terminal and shell in use. Battery is shown on Linux and Mac if applicable.
 
+![demo](perlfetch_demo.gif)
+
 ## Dependencies
 - Perl
 - lsb-release
