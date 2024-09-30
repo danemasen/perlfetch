@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.6.2 by danemasen contact@danemasen.com
+# perlfetch v1.6.3 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -22,398 +22,265 @@ my $no_battery = $ENV{PERLFETCH_NO_BATTERY};
 
 # subroutine that fetches date
 sub getDate {
-
  if ($no_color == 1) {
-
   print(" DATE\t\t| ", `date +"%Y-%m-%d"`);
-
  } else {
-
   print(" \033[34;1mDATE\t\t|\033[0m ", `date +"%Y-%m-%d"`);
-
  }
-
 }
 
 
 # subroutine that fetches time
 sub getTime {
-
  my $imperial_time = `date +"%I:%M "`;
  chomp $imperial_time;
 
  if ($no_color == 1) {
-
   if ($imperial == 1) {
-
    print(" TIME\t\t| ", $imperial_time);
-
    if (`date +"%H"` < 12) {
-
     print("am\n");
-
    } else {
-
     print("pm\n");
-
    }
-
   } else {
-
    print(" TIME\t\t| ", `date +"%H:%M"`);
-
   }
-
  } else {
-
   if ($imperial == 1) {
-
    print(" \033[35;1mTIME\t\t|\033[0m ", $imperial_time);
-
    if (`date +"%H"` < 12) {
-
     print("am\n");
-
    } else {
-
     print("pm\n");
-
    }
-
   } else {
-
    print(" \033[35;1mTIME\t\t|\033[0m ", `date +"%H:%M"`);
-
   }
-
  }
-
 }
 
 
 # subroutine that fetches the host name of the current machine
 sub getHostName {
-
  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
  if ($no_color == 1) {
-
   # print host name
   print(" HOST\t\t| ", `uname -n`);
-
  } else {
-
   # print host name
   print(" \033[37;1mHOST\t\t|\033[0m ", `uname -n`);
-
  }
-
 }
 
 
 # subroutine that fetches distribution of Linux
 sub getFlavor {
-
  # store shell command in $flavor
  my $flavor = `lsb_release -sd`;
-
  # if $flavor contains "Linux" then remove quotes, otherwise ignore quotes
  if (index($flavor, "Linux")) {
-
   # parse stored command
   $flavor = substr $flavor, 1, -2;
-
   # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
   if ($no_color == 1) {
-
    # print flavor of Linux without color
    print(" FLAVOR\t\t| ", $flavor, "\n");
-
   } else {
-
    # print flavor of Linux with color
    print(" \033[33;1mFLAVOR\t\t|\033[0m ", $flavor, "\n");
-
   }
-
  } else {
-
   # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
   if ($no_color == 1) {
-
    # print flavor of Linux without color
    print(" FLAVOR\t| ", $flavor, "\n");
-
   } else {
-
    # print flavor of Linux with color
    print(" \033[33;1mFLAVOR\033[0m\t| ", $flavor, "\n");
-
   }
-
  }
-
 }
 
 
 # subroutine that fetches OS and prints Linux distro if OS is Linux
 sub getOS {
-
  # store os name in $os variable
  my $os = `uname`;
 
  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
  if ($no_color == 1) {
-
   # print operating system without color
   print(" OS\t\t| ", $os);
-
  } else {
-  
   # print operating system with color
   print(" \033[32;1mOS\t\t|\033[0m ", $os);
-
  }
-
 
  # if $os contains "Linux" then print $flavor otherwise ignore $flavor
  if (index($os, "Linux") != -1 && $no_flavor != 1) {
-
   # print Linux distro
   getFlavor();
-
  } elsif (index($os, "Linux") != -1 && $no_flavor != 1) {}
-
 }
 
 
 # subroutine that fetches the current architecture
 sub getArch {
-
  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
  if ($no_color == 1) {
-
   # print machine's architecture without color
   print(" ARCHITECTURE\t| ", `uname -m`);
-
  } else {
-
   # print machine's architecture with color
   print(" \033[36;1mARCHITECTURE\t|\033[0m ", `uname -m`);
-
  }
-
 }
 
 
 # subroutine that fetches current OS or kernel version
 sub getVersion {
-
  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
  if ($no_color == 1) {
-
   # print system version without color
   print(" VERSION\t| ", `uname -r`);
-
  } else {
-
   # print system version with color
   print(" \033[34;1mVERSION\t|\033[0m ", `uname -r`);
-
  }
-
 }
 
 
 # subroutine that fetches the current terminal being used
 sub getTerminal {
-
  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
  if ($no_color == 1) {
-
   # print terminal used without color
   print(" TERMINAL\t| ", `echo \$TERM`);
-
  } else {
-
   # print terminal used with color
   print(" \033[32;1mTERMINAL\t|\033[0m ", `echo \$TERM`);
-
  }
-
 }
 
 
 sub getShell {
-
  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
  if ($no_color == 1) {
-
  # print shell used without color
  print(" SHELL\t\t| ", `echo \$SHELL`);
-
  } else {
-
  # print shell used with color
  print(" \033[35;1mSHELL\t\t|\033[0m ", `echo \$SHELL`);
-
  }
-
 }
 
 
 # subroutine that fetches battery capacity
 sub getBattery {
-
  # store OS X shell command in $ioreg
  my $ioreg = system("ioreg --help 2>/dev/null");
 
  # if BAT0 and BAT1 exist, print their combined capacity divided by two
  if (-e "/sys/class/power_supply/BAT0/capacity" && -e "/sys/class/power_supply/BAT1/capacity") {
-
   # store contents of BAT0's capacity in $battery
   my $battery = `cat /sys/class/power_supply/BAT0/capacity` / 2;
-
   # store contents of BAT1's capacity in $battery1
   my $battery1 = `cat /sys/class/power_supply/BAT1/capacity` / 2;
-
   # remove \n character from $battery and $battery1
   chomp ($battery, $battery1);
 
   # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
   if ($no_color == 1) {
-
    # print current dual battery capacity without color
    print(" BATTERY\t| ", $battery + $battery1, "%\n");
-
   } else {
-
    # print current dual battery capacity with color
    print(" \033[36;1mBATTERY\t|\033[0m ", $battery + $battery1, "%\n");
-
   }
-
   # else if BAT0 exists
  } elsif (-e "/sys/class/power_supply/BAT0/capacity") {
-
   # store contents of BAT0 in $battery
   my $battery = `cat /sys/class/power_supply/BAT0/capacity`;
-
   # remove \n character
   chomp $battery;
 
   # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
   if ($no_color == 1) {
-
    # print current single battery capacity without color
    print(" BATTERY\t| ", $battery, "%\n");
-
   } else {
-
    # print current single battery capacity with color
    print(" \033[36;1mBATTERY\t|\033[0m ", $battery, "%\n");
-
   }
-
   # else if ioreg command exists
  } elsif ($ioreg == 256) {
-
   # store OS X battery
   my $checkOSXBattery = `ioreg -l | grep -o '"CurrentCapacity" = \\d\\+' | grep -o '\\d*'`;
-
   # remove \n character
   chomp $checkOSXBattery;
 
   # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
   if ($no_color == 1) {
-
    # print current OS X battery capacity without color
    print(" BATTERY\t| ", $checkOSXBattery, "%\n");
-
   } else {
-
    # print current OS X battery capacity
    print(" \033[36;1mBATTERY\t|\033[0m ", $checkOSXBattery, "%\n");
-
   }
-
  }
-
 }
 
 
 if ($no_date != 1) {
-
  # print date
  getDate();
-
 }
 
 if ($no_time != 1) {
-
  # print date
  getTime();
-
 }
 
 if ($no_host != 1) {
-
  # print host name
  getHostName();
-
 }
 
 if ($no_os != 1) {
-
  # print OS and Linux distro if os is Linux
  getOS();
-
 }
 
 if ($no_arch != 1) {
-
  # print architecture
  getArch();
-
 }
 
 if ($no_version != 1) {
-
  # print system version
  getVersion();
-
 }
 
 if ($no_terminal != 1) {
-
  # print terminal used
  getTerminal();
-
 }
 
 if ($no_shell != 1) {
-
  # print shell used
  getShell();
-
 }
 
 if ($no_battery != 1) {
-
  # print battery capacity and status
  getBattery();
-
 }
 
 if ($no_date == 1 && $no_time == 1 && $no_host == 1 && $no_os == 1 && $no_flavor == 1 && $no_arch == 1 && $no_version == 1 && $no_terminal == 1 && $no_shell == 1 && $no_battery == 1) {
-
  if ($no_color == 1) {
-
   print " All modules are disabled!\n";
-
  } else {
-
   print " \033[31;1mAll modules are disabled!\033[0m\n";
-
  }
-
 }
