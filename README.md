@@ -50,7 +50,7 @@ And of course, multiple can be applied at the same time.
 - [x] Add user configuration through environment variables
 - [x] Add date
 - [x] Add time
-- [ ] Add the flags -v and --version
+- [x] Add the flags -v and --version
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
