@@ -23,7 +23,7 @@ if (defined $version) {
 my $no_color = $ENV{NO_COLOR};
 my $no_date = $ENV{PERLFETCH_NO_DATE};
 my $no_time = $ENV{PERLFETCH_NO_TIME};
-my $imperial = $ENV{PERLFETCH_USE_IMPERIAL};
+my $twelvehour = $ENV{PERLFETCH_USE_12_HOUR};
 my $no_host = $ENV{PERLFETCH_NO_HOST};
 my $no_os = $ENV{PERLFETCH_NO_OS};
 my $no_flavor = $ENV{PERLFETCH_NO_FLAVOR};
@@ -46,23 +46,23 @@ sub getDate {
 
 # subroutine that fetches time
 sub getTime {
- my $imperial_time = `date +"%I:%M "`;
- chomp $imperial_time;
+ my $twelvehour_time = `date +"%I:%M "`;
+ chomp $twelvehour_time;
 
  if ($no_color == 1) {
-  if ($imperial == 1) {
-   print(" TIME\t\t| ", $imperial_time);
+  if ($twelvehour == 1) {
+   print(" TIME\t\t| ", $twelvehour_time);
    if (`date +"%H"` < 12) {
-    print("am\n");
+    print("am");
    } else {
-    print("pm\n");
+    print("pm");
    }
   } else {
    print(" TIME\t\t| ", `date +"%H:%M"`);
   }
  } else {
-  if ($imperial == 1) {
-   print(" \033[35;1mTIME\t\t|\033[0m ", $imperial_time);
+  if ($twelvehour == 1) {
+   print(" \033[35;1mTIME\t\t|\033[0m ", $twelvehour_time);
    if (`date +"%H"` < 12) {
     print("am\n");
    } else {
