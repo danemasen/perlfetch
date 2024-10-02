@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.6.3 by danemasen contact@danemasen.com
+# perlfetch v1.7.3 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -14,7 +14,7 @@ GetOptions ("version" => \$version);
 GetOptions ("v" => \$version);
 
 if (defined $version) {
- print "1.0";
+ print "1.7.3";
  exit 0;
 }
 
