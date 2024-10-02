@@ -5,6 +5,20 @@
 # Project is under the ISC license
 
 
+use Getopt::Long;
+
+
+my $version = undef;
+
+GetOptions ("version" => \$version);
+GetOptions ("v" => \$version);
+
+if (defined $version) {
+ print "1.0";
+ exit 0;
+}
+
+
 # read and store environment variables
 my $no_color = $ENV{NO_COLOR};
 my $no_date = $ENV{PERLFETCH_NO_DATE};
