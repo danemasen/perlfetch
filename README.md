@@ -14,8 +14,13 @@ Perlfetch has been tested on \[Void\] Linux, \[Open\]BSD and OS X!
 - GNU Core Utilities
 
 ## Installation
+### Via Makefile
+- Clone this repository
+- Run `make install`
+### Manually
 - Clone this repository
 - Place `perlfetch` in your $PATH (such as `/usr/local/bin`)
+- Place `perlfetch.1` in your $MANPATH (such as `/usr/local/share/man/man1/`)
 
 ## Customization
 Perlfetch supports customization through environment variables.
@@ -53,11 +58,11 @@ And of course, multiple can be applied at the same time.
 - [x] Add time
 - [x] Add the flags -v and --version
 - [x] Create makefile
+- [ ] \***IN PROGRESS**\* Write man page
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
 - [ ] Add swap usage
-- [ ] Write man page
 
 ## Known Issues
 - Battery doesn't show on OpenBSD (and possibly other BSDs.)
