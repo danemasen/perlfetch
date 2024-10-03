@@ -77,7 +77,7 @@ sub getTime {
 
 # subroutine that fetches the host name of the current machine
 sub getHostName {
- # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
  if ($ENV{NO_COLOR} ne "") {
   # print host name
   print(" HOST\t\t| ", `uname -n`);
@@ -96,7 +96,7 @@ sub getFlavor {
  if (index($flavor, "Linux")) {
   # parse stored command
   $flavor = substr $flavor, 1, -2;
-  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if ($ENV{NO_COLOR} ne "") {
    # print flavor of Linux without color
    print(" FLAVOR\t\t| ", $flavor, "\n");
@@ -105,7 +105,7 @@ sub getFlavor {
    print(" \033[33;1mFLAVOR\t\t|\033[0m ", $flavor, "\n");
   }
  } else {
-  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if ($ENV{NO_COLOR} ne "") {
    # print flavor of Linux without color
    print(" FLAVOR\t| ", $flavor, "\n");
@@ -122,7 +122,7 @@ sub getOS {
  # store os name in $os variable
  my $os = `uname`;
 
- # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
  if ($ENV{NO_COLOR} ne "") {
   # print operating system without color
   print(" OS\t\t| ", $os);
@@ -141,7 +141,7 @@ sub getOS {
 
 # subroutine that fetches the current architecture
 sub getArch {
- # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
  if ($ENV{NO_COLOR} ne "") {
   # print machine's architecture without color
   print(" ARCHITECTURE\t| ", `uname -m`);
@@ -154,7 +154,7 @@ sub getArch {
 
 # subroutine that fetches current OS or kernel version
 sub getVersion {
- # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
  if ($ENV{NO_COLOR} ne "") {
   # print system version without color
   print(" VERSION\t| ", `uname -r`);
@@ -167,7 +167,7 @@ sub getVersion {
 
 # subroutine that fetches the current terminal being used
 sub getTerminal {
- # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
  if ($ENV{NO_COLOR} ne "") {
   # print terminal used without color
   print(" TERMINAL\t| ", `echo \$TERM`);
@@ -179,7 +179,7 @@ sub getTerminal {
 
 
 sub getShell {
- # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
  if ($ENV{NO_COLOR} ne "") {
  # print shell used without color
  print(" SHELL\t\t| ", `echo \$SHELL`);
@@ -204,7 +204,7 @@ sub getBattery {
   # remove \n character from $battery and $battery1
   chomp ($battery, $battery1);
 
-  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if ($ENV{NO_COLOR} ne "") {
    # print current dual battery capacity without color
    print(" BATTERY\t| ", $battery + $battery1, "%\n");
@@ -219,7 +219,7 @@ sub getBattery {
   # remove \n character
   chomp $battery;
 
-  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if ($ENV{NO_COLOR} ne "") {
    # print current single battery capacity without color
    print(" BATTERY\t| ", $battery, "%\n");
@@ -234,7 +234,7 @@ sub getBattery {
   # remove \n character
   chomp $checkOSXBattery;
 
-  # if PERLFETCH_NO_COLOR environment variable is set to 1, then print no color
+  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if ($ENV{NO_COLOR} ne "") {
    # print current OS X battery capacity without color
    print(" BATTERY\t| ", $checkOSXBattery, "%\n");
