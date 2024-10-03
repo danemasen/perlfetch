@@ -2,6 +2,67 @@
 .SH NAME
 .SH SYNOPSIS
 .B perlfetch
-.RB [ \-v ] [ \-\-version ]
+.RB [ \-v ]
+.RB [ \-\-version ]
 .SH DESCRIPTION
+.P
 Perlfetch is a simple system information fetching script that can be customized through environment variables.
+.SH USAGE
+.SS Flags
+.TP
+.B \-v, \-\-version
+Prints the version to stdout.
+.SS Environment Variables
+.TP
+.B NO_COLOR
+Completely disables color output. Follows the https://no-color.org standard. Valid values are 1-0.
+.TP
+.B PERLFETCH_NO_DATE
+Stops the date from being printed.
+.TP
+.B PERLFETCH_NO_TIME
+Stops the time from being printed.
+.TP
+.B PERLFETCH_USE_12_HOUR
+Uses 12-hour time instead of 24-hour time.
+.TP
+.B PERLFETCH_NO_HOST
+Stops the host name from being printed.
+.TP
+.B PERLFETCH_NO_OS
+Stops the operating system from being printed.
+.TP
+.B PERLFETCH_NO_FLAVOR
+Stops the distribution of Linux from being printed. Only applicable on Linux systems.
+.TP
+.B PERLFETCH_NO_ARCH
+Stops the systems architecture from being printed.
+.TP
+.B PERLFETCH_NO_VERSION
+Stops the kernel/system version from being printed.
+.TP
+.B PERLFETCH_NO_TERMINAL
+Stops the current terminal in use, from being printed.
+.TP
+.B PERLFETCH_NO_SHELL
+Stops the current shell in use, from being printed.
+.TP
+.B PERLFETCH_NO_BATTERY
+Stops the current battery capacity from being printed. Only applicable to Linux and OS X systems.
+.SH LICENSE
+.P
+ISC License
+.P
+Copyright (c) 2024 contact@danemasen.com
+.P
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+.P
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
