@@ -56,6 +56,8 @@ And of course, multiple can be applied at the same time.
 - [ ] Add GPU information
 - [ ] Add RAM usage
 - [ ] Add swap usage
+- [ ] Write man page
+- [ ] Create makefile
 
 ## Known Issues
 - Battery doesn't show on OpenBSD (and possibly other BSDs.)
