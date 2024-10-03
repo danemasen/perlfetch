@@ -58,7 +58,7 @@ And of course, multiple can be applied at the same time.
 - [x] Add time
 - [x] Add the flags -v and --version
 - [x] Create makefile
-- [ ] \***IN PROGRESS**\* Write man page
+- [x] Write man page
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
