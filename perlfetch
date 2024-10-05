@@ -11,18 +11,18 @@ use Getopt::Long;
 my $version = undef;
 my $help = undef;
 
-GetOptions ("version" => \$version, 
-            "v" => \$version,
-            "help" => \$help,
-            "h" => \$help);
+GetOptions ("help" => \$help,
+            "h" => \$help,
+            "version" => \$version, 
+            "v" => \$version);
 
-if (defined $version) {
- print "1.7.6";
+if (defined $help) {
+ print "usage: perlfetch [-h -v] [--help --version]";
  exit 0;
 }
 
-if (defined $help) {
- print "usage: perlfetch [-v -h] [--version --help]";
+if (defined $version) {
+ print "1.7.6";
  exit 0;
 }
 
