@@ -17,7 +17,9 @@ GetOptions ("help" => \$help,
             "v" => \$version);
 
 if (defined $help) {
- print "usage: perlfetch [-h -v] [--help --version]";
+ print "usage: perlfetch [-h -v] [--help --version]\n";
+ print "\t-h, --help\t Show this help message.\n";
+ print "\t-v, --version\t Show current version.\n";
  exit 0;
 }
 
