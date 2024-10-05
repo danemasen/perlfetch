@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.7.7 by danemasen contact@danemasen.com
+# perlfetch v1.7.8 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -24,7 +24,7 @@ if (defined $help) {
 }
 
 if (defined $version) {
- print "1.7.7";
+ print "1.7.8";
  exit 0;
 }
 
