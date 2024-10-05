@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.7.5 by danemasen contact@danemasen.com
+# perlfetch v1.7.6 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -9,12 +9,20 @@ use Getopt::Long;
 
 
 my $version = undef;
+my $help = undef;
 
-GetOptions ("version" => \$version);
-GetOptions ("v" => \$version);
+GetOptions ("version" => \$version, 
+            "v" => \$version,
+            "help" => \$help,
+            "h" => \$help);
 
 if (defined $version) {
- print "1.7.5";
+ print "1.7.6";
+ exit 0;
+}
+
+if (defined $help) {
+ print "usage: perlfetch [-v -h] [--version --help]";
  exit 0;
 }
 
