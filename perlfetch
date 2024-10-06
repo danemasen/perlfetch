@@ -7,46 +7,76 @@
 
 use Getopt::Long;
 
+# Options under package namespace "opt::" with default values
+{
+ package opt;
+ $version;
+ $help;
+ $twelvehour;
+ $color = 1;
+ $date = 1;
+ $time = 1;
+ $host = 1;
+ $os = 1;
+ $flavor = 1;
+ $arch = 1;
+ $osversion = 1;
+ $terminal = 1;
+ $shell = 1;
+ $battery = 1;
+}
 
-my $version = undef;
-my $help = undef;
+# read and store environment variables
+# disable the flags if the variables are set
+$opt::color      = 0 if $ENV{NO_COLOR} ne "";
+$opt::date       = 0 if $ENV{PERLFETCH_NO_DATE};
+$opt::time       = 0 if $ENV{PERLFETCH_NO_TIME};
+$opt::host       = 0 if $ENV{PERLFETCH_NO_HOST};
+$opt::os         = 0 if $ENV{PERLFETCH_NO_OS};
+$opt::flavor     = 0 if $ENV{PERLFETCH_NO_FLAVOR};
+$opt::arch       = 0 if $ENV{PERLFETCH_NO_ARCH};
+$opt::osversion  = 0 if $ENV{PERLFETCH_NO_VERSION};
+$opt::terminal   = 0 if $ENV{PERLFETCH_NO_TERMINAL};
+$opt::shell      = 0 if $ENV{PERLFETCH_NO_SHELL};
+$opt::battery    = 0 if $ENV{PERLFETCH_NO_BATTERY};
+$opt::twelvehour = $ENV{PERLFETCH_USE_12_HOUR};
 
-GetOptions ("help" => \$help,
-            "h" => \$help,
-            "version" => \$version, 
-            "v" => \$version);
+# Parse options.
+GetOptions (
+ "help|h"     => \$opt::help,
+ "version|v"  => \$opt::version,
+ "twelvehour" => \$opt::twelvehour,
 
-if (defined $help) {
+ # --no[option] for disabling --[option] to force enable
+ # even if an environment variable was set
+ "color!"     => \$opt::color,
+ "date!"      => \$opt::date,
+ "time!"      => \$opt::time,
+ "host!"      => \$opt::host,
+ "os!"        => \$opt::os,
+ "flavor!"    => \$opt::flavor,
+ "arch!"      => \$opt::arch,
+ "osversion!" => \$opt::osversion,
+ "terminal!"  => \$opt::terminal,
+ "shell!"     => \$opt::shell,
+ "battery!"   => \$opt::battery,
+);
+
+if (defined $opt::help) {
  print "Usage: perlfetch [-h -v] [--help --version]\n";
  print "\t-h, --help\t Show this help message.\n";
  print "\t-v, --version\t Show current version.\n";
  exit 0;
 }
 
-if (defined $version) {
- print "1.7.8";
+if (defined $opt::version) {
+ print "1.7.8\n";
  exit 0;
 }
 
-
-# read and store environment variables
-my $no_color = $ENV{NO_COLOR} ne "";
-my $no_date = $ENV{PERLFETCH_NO_DATE};
-my $no_time = $ENV{PERLFETCH_NO_TIME};
-my $twelvehour = $ENV{PERLFETCH_USE_12_HOUR};
-my $no_host = $ENV{PERLFETCH_NO_HOST};
-my $no_os = $ENV{PERLFETCH_NO_OS};
-my $no_flavor = $ENV{PERLFETCH_NO_FLAVOR};
-my $no_arch = $ENV{PERLFETCH_NO_ARCH};
-my $no_version = $ENV{PERLFETCH_NO_VERSION};
-my $no_terminal = $ENV{PERLFETCH_NO_TERMINAL};
-my $no_shell = $ENV{PERLFETCH_NO_SHELL};
-my $no_battery = $ENV{PERLFETCH_NO_BATTERY};
-
-
 # subroutine that fetches date
 sub getDate {
- if ($no_color) {
+ if (!$opt::color) {
   print(" DATE\t\t| ", `date +"%Y-%m-%d"`);
  } else {
   print(" \033[34;1mDATE\t\t|\033[0m ", `date +"%Y-%m-%d"`);
@@ -59,19 +89,19 @@ sub getTime {
  my $twelvehour_time = `date +"%I:%M "`;
  chomp $twelvehour_time;
 
- if ($no_color) {
-  if ($twelvehour == 1) {
+ if (!$opt::color) {
+  if ($opt::twelvehour == 1) {
    print(" TIME\t\t| ", $twelvehour_time);
    if (`date +"%H"` < 12) {
-    print("am");
+    print("am\n");
    } else {
-    print("pm");
+    print("pm\n");
    }
   } else {
    print(" TIME\t\t| ", `date +"%H:%M"`);
   }
  } else {
-  if ($twelvehour == 1) {
+  if ($opt::twelvehour == 1) {
    print(" \033[35;1mTIME\t\t|\033[0m ", $twelvehour_time);
    if (`date +"%H"` < 12) {
     print("am\n");
@@ -88,7 +118,7 @@ sub getTime {
 # subroutine that fetches the host name of the current machine
 sub getHostName {
  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
- if ($no_color) {
+ if (!$opt::color) {
   # print host name
   print(" HOST\t\t| ", `uname -n`);
  } else {
@@ -107,7 +137,7 @@ sub getFlavor {
   # parse stored command
   $flavor = substr $flavor, 1, -2;
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if ($no_color) {
+  if (!$opt::color) {
    # print flavor of Linux without color
    print(" FLAVOR\t\t| ", $flavor, "\n");
   } else {
@@ -116,7 +146,7 @@ sub getFlavor {
   }
  } else {
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if ($no_color) {
+  if (!$opt::color) {
    # print flavor of Linux without color
    print(" FLAVOR\t| ", $flavor, "\n");
   } else {
@@ -133,7 +163,7 @@ sub getOS {
  my $os = `uname`;
 
  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
- if ($no_color) {
+ if (!$opt::color) {
   # print operating system without color
   print(" OS\t\t| ", $os);
  } else {
@@ -142,17 +172,17 @@ sub getOS {
  }
 
  # if $os contains "Linux" then print $flavor otherwise ignore $flavor
- if (index($os, "Linux") != -1 && $no_flavor != 1) {
+ if (index($os, "Linux") != -1 && $opt::flavor == 1) {
   # print Linux distro
   getFlavor();
- } elsif (index($os, "Linux") != -1 && $no_flavor != 1) {}
+ } elsif (index($os, "Linux") != -1 && $opt::flavor == 1) {}
 }
 
 
 # subroutine that fetches the current architecture
 sub getArch {
  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
- if ($no_color) {
+ if (!$opt::color) {
   # print machine's architecture without color
   print(" ARCHITECTURE\t| ", `uname -m`);
  } else {
@@ -165,7 +195,7 @@ sub getArch {
 # subroutine that fetches current OS or kernel version
 sub getVersion {
  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
- if ($no_color) {
+ if (!$opt::color) {
   # print system version without color
   print(" VERSION\t| ", `uname -r`);
  } else {
@@ -178,7 +208,7 @@ sub getVersion {
 # subroutine that fetches the current terminal being used
 sub getTerminal {
  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
- if ($no_color) {
+ if (!$opt::color) {
   # print terminal used without color
   print(" TERMINAL\t| ", `echo \$TERM`);
  } else {
@@ -190,7 +220,7 @@ sub getTerminal {
 
 sub getShell {
  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
- if ($no_color) {
+ if (!$opt::color) {
  # print shell used without color
  print(" SHELL\t\t| ", `echo \$SHELL`);
  } else {
@@ -215,7 +245,7 @@ sub getBattery {
   chomp ($battery, $battery1);
 
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if ($no_color) {
+  if (!$opt::color) {
    # print current dual battery capacity without color
    print(" BATTERY\t| ", $battery + $battery1, "%\n");
   } else {
@@ -230,7 +260,7 @@ sub getBattery {
   chomp $battery;
 
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if ($no_color) {
+  if (!$opt::color) {
    # print current single battery capacity without color
    print(" BATTERY\t| ", $battery, "%\n");
   } else {
@@ -245,7 +275,7 @@ sub getBattery {
   chomp $checkOSXBattery;
 
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if ($no_color) {
+  if (!$opt::color) {
    # print current OS X battery capacity without color
    print(" BATTERY\t| ", $checkOSXBattery, "%\n");
   } else {
@@ -256,53 +286,53 @@ sub getBattery {
 }
 
 
-if ($no_date != 1) {
+if ($opt::date == 1) {
  # print date
  getDate();
 }
 
-if ($no_time != 1) {
+if ($opt::time == 1) {
  # print date
  getTime();
 }
 
-if ($no_host != 1) {
+if ($opt::host == 1) {
  # print host name
  getHostName();
 }
 
-if ($no_os != 1) {
+if ($opt::os == 1) {
  # print OS and Linux distro if os is Linux
  getOS();
 }
 
-if ($no_arch != 1) {
+if ($opt::arch == 1) {
  # print architecture
  getArch();
 }
 
-if ($no_version != 1) {
+if ($opt::osversion == 1) {
  # print system version
  getVersion();
 }
 
-if ($no_terminal != 1) {
+if ($opt::terminal == 1) {
  # print terminal used
  getTerminal();
 }
 
-if ($no_shell != 1) {
+if ($opt::shell == 1) {
  # print shell used
  getShell();
 }
 
-if ($no_battery != 1) {
+if ($opt::battery == 1) {
  # print battery capacity and status
  getBattery();
 }
 
-if ($no_date == 1 && $no_time == 1 && $no_host == 1 && $no_os == 1 && $no_flavor == 1 && $no_arch == 1 && $no_version == 1 && $no_terminal == 1 && $no_shell == 1 && $no_battery == 1) {
- if ($no_color) {
+if ($opt::date != 1 && $opt::time != 1 && $opt::host != 1 && $opt::os != 1 && $opt::flavor != 1 && $opt::arch != 1 && $opt::osversion != 1 && $opt::terminal != 1 && $opt::shell != 1 && $opt::battery != 1) {
+ if (!$opt::color) {
   print " All modules are disabled!\n";
  } else {
   print " \033[31;1mAll modules are disabled!\033[0m\n";
