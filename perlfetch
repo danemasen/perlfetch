@@ -5,25 +5,29 @@
 # Project is under the ISC license
 
 
+use warnings;
+use strict;
+
+
 use Getopt::Long;
 
 # Options under package namespace "opt::" with default values
 {
  package opt;
- $version;
- $help;
- $twelvehour;
- $color = 1;
- $date = 1;
- $time = 1;
- $host = 1;
- $os = 1;
- $flavor = 1;
- $arch = 1;
- $osversion = 1;
- $terminal = 1;
- $shell = 1;
- $battery = 1;
+ our $version;
+ our $help;
+ our $twelvehour;
+ our $color = 1;
+ our $date = 1;
+ our $time = 1;
+ our $host = 1;
+ our $os = 1;
+ our $flavor = 1;
+ our $arch = 1;
+ our $osversion = 1;
+ our $terminal = 1;
+ our $shell = 1;
+ our $battery = 1;
 }
 
 # read and store environment variables
