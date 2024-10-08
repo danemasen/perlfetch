@@ -23,9 +23,9 @@ Perlfetch has been tested on \[Void\] Linux, \[Open\]BSD and OS X!
 - Place `perlfetch.1` in your $MANPATH (such as `/usr/local/share/man/man1/`)
 
 ## Customization
-Perlfetch supports customization through environment variables.
+Perlfetch supports customization via environment variables and flags.
 
-To customize Perlfetch:
+To customize Perlfetch with environment variables:
 
 - Add `export ENVIRONMENT_VARIABLE=1` to your `.bashrc` (or `.bash_profile`) or `.zshrc`
 - `source` said config/rc file or launch a new terminal
@@ -49,6 +49,32 @@ PERLFETCH_NO_BATTERY
 ```
 
 And of course, multiple can be applied at the same time.
+
+---
+
+To customize Perlfetch with flags:
+
+- Append one of the following flags to Perlfetch:
+```
+--nocolor
+--nodate
+--notime
+--twelvehour
+--nohost
+--noos
+--noflavor
+--noarch
+--noversion
+--noterminal
+--noshell
+--nobattery
+```
+
+Like so:
+
+```
+$ perlfetch --twelvehour --noflavor
+```
 
 ## TODO
 - [x] Add architecture information
