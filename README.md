@@ -81,7 +81,4 @@ $ perlfetch --twelvehour --noflavor
 - [ ] Add GPU information
 - [ ] Add RAM usage
 - [ ] Add swap usage
-- [ ] Fix issue #1
-
-## Known Issues
-- #1 Battery doesn't show on OpenBSD (and possibly other BSDs.)
+- [x] Fix issue #1 (Battery not showing on OpenBSD)
