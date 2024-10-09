@@ -77,18 +77,11 @@ $ perlfetch --twelvehour --noflavor
 ```
 
 ## TODO
-- [x] Add architecture information
-- [x] Add host name
-- [x] Add user configuration through environment variables
-- [x] Add date
-- [x] Add time
-- [x] Add the flags -v and --version
-- [x] Create makefile
-- [x] Write man page
 - [ ] Add CPU information
 - [ ] Add GPU information
 - [ ] Add RAM usage
 - [ ] Add swap usage
+- [ ] Fix issue #1
 
 ## Known Issues
-- Battery doesn't show on OpenBSD (and possibly other BSDs.)
+- #1 Battery doesn't show on OpenBSD (and possibly other BSDs.)
