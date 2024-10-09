@@ -239,6 +239,8 @@ sub getBattery {
  # store OS X shell command in $ioreg
  my $ioreg = system("ioreg --help 2>/dev/null");
 
+ my $checkBSDBattery = `apm -l 2>/dev/null`;
+
  # if BAT0 and BAT1 exist, print their combined capacity divided by two
  if (-e "/sys/class/power_supply/BAT0/capacity" && -e "/sys/class/power_supply/BAT1/capacity") {
   # store contents of BAT0's capacity in $battery
@@ -246,7 +248,7 @@ sub getBattery {
   # store contents of BAT1's capacity in $battery1
   my $battery1 = `cat /sys/class/power_supply/BAT1/capacity` / 2;
   # remove \n character from $battery and $battery1
-  chomp ($battery, $battery1);
+  chomp($battery, $battery1);
 
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if (!$opt::color) {
@@ -285,6 +287,13 @@ sub getBattery {
   } else {
    # print current OS X battery capacity
    print(" \033[36;1mBATTERY\t|\033[0m ", $checkOSXBattery, "%\n");
+  }
+ } elsif ($checkBSDBattery ne "") {
+  chomp $checkBSDBattery;
+  if (!$opt::color) {
+   print(" BATTERY\t| ", $checkBSDBattery, "%\n");
+  } else {
+   print(" \033[36;1mBATTERY\t|\033[0m ", $checkBSDBattery, "%\n");
   }
  }
 }
