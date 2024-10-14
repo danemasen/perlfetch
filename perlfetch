@@ -133,26 +133,14 @@ sub getFlavor {
  # store shell command in $flavor
  my $flavor = `lsb_release -sd`;
  # if $flavor contains "Linux" then remove quotes, otherwise ignore quotes
- if (index($flavor, "Linux") >= 0) {
-  # parse stored command
-  $flavor = substr $flavor, 1, -2;
-  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if (!$opt::color) {
-   # print flavor of Linux without color
-   print(" FLAVOR\t\t| ", $flavor, "\n");
-  } else {
-   # print flavor of Linux with color
-   print(" \033[33;1mFLAVOR\t\t|\033[0m ", $flavor, "\n");
-  }
+ $flavor =~ s/^"|"$//g;
+ # if NO_COLOR environment variable is set to anything other than an empty string, print without color
+ if (!$opt::color) {
+  # print flavor of Linux without color
+  print(" FLAVOR\t\t| ", $flavor);
  } else {
-  # if NO_COLOR environment variable is set to anything other than an empty string, print without color
-  if (!$opt::color) {
-   # print flavor of Linux without color
-   print(" FLAVOR\t\t| ", $flavor);
-  } else {
-   # print flavor of Linux with color
-   print(" \033[33;1mFLAVOR\033[0m\t\t| ", $flavor);
-  }
+  # print flavor of Linux with color
+  print(" \033[33;1mFLAVOR\t\t|\033[0m ", $flavor);
  }
 }
 
