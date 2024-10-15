@@ -136,6 +136,7 @@ sub getFlavor {
  if (index($flavor, "Linux") >= 0) {
   # parse stored command
   $flavor = substr $flavor, 1, -2;
+  chomp $flavor;
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if (!$opt::color) {
    # print flavor of Linux without color
@@ -148,10 +149,10 @@ sub getFlavor {
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
   if (!$opt::color) {
    # print flavor of Linux without color
-   print(" FLAVOR\t| ", $flavor, "\n");
+   print(" FLAVOR\t\t| ", $flavor, "\n");
   } else {
    # print flavor of Linux with color
-   print(" \033[33;1mFLAVOR\033[0m\t| ", $flavor, "\n");
+   print(" \033[33;1mFLAVOR\033[0m\t\t| ", $flavor, "\n");
   }
  }
 }
