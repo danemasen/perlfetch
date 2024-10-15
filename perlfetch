@@ -133,7 +133,7 @@ sub getFlavor {
  # store shell command in $flavor
  my $flavor = `lsb_release -sd`;
  # if $flavor contains "Linux" then remove quotes, otherwise ignore quotes
- if (index($flavor, "Linux")) {
+ if (index($flavor, "Linux") >= 0) {
   # parse stored command
   $flavor = substr $flavor, 1, -2;
   # if NO_COLOR environment variable is set to anything other than an empty string, print without color
