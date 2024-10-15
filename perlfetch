@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 
-# perlfetch v1.8.1 by danemasen contact@danemasen.com
+# perlfetch v1.8.3 by danemasen contact@danemasen.com
 # Project is under the ISC license
 
 
@@ -70,7 +70,7 @@ if (defined $opt::help) {
 }
 
 if (defined $opt::version) {
- print "1.8.1\n";
+ print "1.8.3\n";
  exit 0;
 }
 
