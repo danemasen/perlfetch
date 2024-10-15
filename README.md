@@ -21,9 +21,7 @@ Perlfetch has been tested on \[Void\] Linux, \[Open\]BSD and OS X!
 - Clone this repository
 - Place `perlfetch` in your $PATH (such as `/usr/local/bin`)
 - Place `perlfetch.1` in your $MANPATH (such as `/usr/local/share/man/man1/`)
-
-## Customization
-Perlfetch supports customization via environment variables and flags.
+## Customization Perlfetch supports customization via environment variables and flags.
 
 To customize Perlfetch with environment variables:
 
@@ -54,7 +52,7 @@ And of course, multiple can be applied at the same time.
 
 To customize Perlfetch with flags:
 
-- Append one of the following flags to Perlfetch:
+- Append one (or more) of the following flags to Perlfetch:
 ```
 --nocolor
 --nodate
@@ -81,4 +79,3 @@ $ perlfetch --twelvehour --noflavor
 - [ ] Add GPU information
 - [ ] Add RAM usage
 - [ ] Add swap usage
-- [x] Fix issue #1 (Battery not showing on OpenBSD)
