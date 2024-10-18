@@ -67,7 +67,7 @@ if (defined $opt::help) {
  print "\t-h,\t\t --help\t\t Show this help message.\n";
  print "\t-v,\t\t --version\t Show current version.\n";
  print "\n";
- print "\t--twelvehour,\t --twelve-hour\t Use 12-hour time instead of 24-hour time.\n";
+ print "\t--twelvehour\t\t\t Use 12-hour time instead of 24-hour time.\n";
  print "\n";
  print "\t--nocolor,\t --no-color\t Disable color output.\n";
  print "\t--nodate,\t --no-date\t Disable DATE module.\n";
