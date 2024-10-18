@@ -63,9 +63,23 @@ GetOptions (
 );
 
 if (defined $opt::help) {
- print "Usage: perlfetch [-h -v] [--help --version]\n";
- print "\t-h, --help\t Show this help message.\n";
- print "\t-v, --version\t Show current version.\n";
+ print "Usage: perlfetch [-h -v] [--help --version ...]\n";
+ print "\t-h,\t\t --help\t\t Show this help message.\n";
+ print "\t-v,\t\t --version\t Show current version.\n";
+ print "\n";
+ print "\t--twelvehour,\t --twelve-hour\t Use 12-hour time instead of 24-hour time.\n";
+ print "\n";
+ print "\t--nocolor,\t --no-color\t Disable color output.\n";
+ print "\t--nodate,\t --no-date\t Disable DATE module.\n";
+ print "\t--notime,\t --no-time\t Disable TIME module.\n";
+ print "\t--nohost,\t --no-host\t Disable HOST module.\n";
+ print "\t--noos,\t\t --no-os\t Disable OS module.\n";
+ print "\t--noflavor,\t --no-flavor\t Disable FLAVOR module.\n";
+ print "\t--noarch,\t --no-arch\t Disable ARCHITECTURE module.\n";
+ print "\t--noversion,\t --no-version\t Disable VERSION module.\n";
+ print "\t--noterminal,\t --no-terminal\t Disable TERMINAL module.\n";
+ print "\t--noshell,\t --no-shell\t Disable SHELL module.\n";
+ print "\t--nobattery,\t --no-battery\t Disable BATTERY module.\n";
  exit 0;
 }
 
